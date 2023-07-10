@@ -1,0 +1,19 @@
+[package]
+name = "shared-types"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+keywords.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+
+[build-dependencies]
+anyhow.workspace = true
+crux_core = { version = "0.6", features = ["typegen"] }
+crux_http = { version = "0.3" }
+crux_kv = { version = "0.1" }
+crux_platform = { version = "0.1" }
+crux_time = { version = "0.1" }
+shared = { path = "../shared", features = ["typegen"] }
+uuid = { workspace = true }

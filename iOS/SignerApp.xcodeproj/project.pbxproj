@@ -1,0 +1,499 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		11EAE69A01C0EF606B9F6A8A /* libshared_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3D9327C0AC95404A204A763 /* libshared_static.a */; };
+		20DD69D09986CC2DFE111032 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E50AE8D5FE657E155695F1 /* ContentView.swift */; };
+		3AA28D8F2A54712900B03A3F /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = 3AA28D8E2A54712900B03A3F /* web3.swift */; };
+		3B35B6AAEC63138B8BAA30E9 /* SignerAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06C39854EFD470070446175 /* SignerAppApp.swift */; };
+		42936AC2E9FCBACEE3DB6091 /* uniffi-bindgen in Resources */ = {isa = PBXBuildFile; fileRef = A500F82B58B1625CDB80A87E /* uniffi-bindgen */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5249B9BB3F194EBED80F4DAF /* shared.udl in Sources */ = {isa = PBXBuildFile; fileRef = CD719670BE22D3DE2F04DC32 /* shared.udl */; };
+		9AE5126649525796286B9ED7 /* SharedTypes in Frameworks */ = {isa = PBXBuildFile; productRef = D4B1C957D1A3B47626E72EAA /* SharedTypes */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		D27BF368A9BF639742ACB4B3 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.udl";
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			name = "Generate FFI";
+			outputFiles = (
+				"$(PROJECT_DIR)/generated/$(INPUT_FILE_BASE).swift",
+				"$(PROJECT_DIR)/generated/$(INPUT_FILE_BASE)FFI.h",
+			);
+			outputFilesCompilerFlags = (
+			);
+			runOncePerArchitecture = 0;
+			script = "#!/bin/bash\nset -e\n\n# Skip during indexing phase in XCode 13+\nif [ \"$ACTION\" == \"indexbuild\" ]; then\n  echo \"Not building *.udl files during indexing.\"\n  exit 0\nfi\n\n# Skip for preview builds\nif [ \"$ENABLE_PREVIEWS\" = \"YES\" ]; then\n  echo \"Not building *.udl files during preview builds.\"\n  exit 0\nfi\n\ncd \"${INPUT_FILE_DIR}/..\"\n\"${BUILD_DIR}/debug/uniffi-bindgen\" generate \"src/${INPUT_FILE_NAME}\" --language swift --out-dir \"${PROJECT_DIR}/generated\"\n";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXContainerItemProxy section */
+		25C5FD8473EAE953EAA0617D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8C5BEA563FDC9E8403DBC84 /* Shared */;
+			proxyType = 1;
+			remoteGlobalIDString = CA60EED9E654F5D6485F6203;
+			remoteInfo = "uniffi-bindgen-bin";
+		};
+		267FBF252E2E44954FF0AADC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8C5BEA563FDC9E8403DBC84 /* Shared */;
+			proxyType = 1;
+			remoteGlobalIDString = CA605F46CDB7F0727CD6BB52;
+			remoteInfo = "shared-staticlib";
+		};
+		3AA28D892A545DC500B03A3F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8C5BEA563FDC9E8403DBC84 /* Shared */;
+			proxyType = 2;
+			remoteGlobalIDString = CA60137D654510F7F7FCAC5B;
+			remoteInfo = "shared-cdylib";
+		};
+		C1FC2277A9B78773CD0E701C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8C5BEA563FDC9E8403DBC84 /* Shared */;
+			proxyType = 2;
+			remoteGlobalIDString = CA605F46CDB7FB09138082B7;
+			remoteInfo = "shared-staticlib";
+		};
+		CC261FE76FC57BCF476597D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8C5BEA563FDC9E8403DBC84 /* Shared */;
+			proxyType = 2;
+			remoteGlobalIDString = CA60EED9E6548109328FB0D5;
+			remoteInfo = "uniffi-bindgen-bin";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		16A09A3532A117EA4638CD82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5CFAB29AB851735376F82605 /* SharedTypes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SharedTypes; path = "../shared-types/generated/swift/SharedTypes"; sourceTree = SOURCE_ROOT; };
+		981B9FC1A3691C66AA7D022F /* SignerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8C5BEA563FDC9E8403DBC84 /* Shared */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Shared; path = ../shared/shared.xcodeproj; sourceTree = "<group>"; };
+		C06C39854EFD470070446175 /* SignerAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignerAppApp.swift; sourceTree = "<group>"; };
+		CD719670BE22D3DE2F04DC32 /* shared.udl */ = {isa = PBXFileReference; lastKnownFileType = text; path = shared.udl; sourceTree = "<group>"; };
+		D7E50AE8D5FE657E155695F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0601D36AB9908A6562098A2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11EAE69A01C0EF606B9F6A8A /* libshared_static.a in Frameworks */,
+				3AA28D8F2A54712900B03A3F /* web3.swift in Frameworks */,
+				9AE5126649525796286B9ED7 /* SharedTypes in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		21BE11CD22DA1ADF8C11E31A = {
+			isa = PBXGroup;
+			children = (
+				F8B1A0E48570C47A77CB74AE /* Packages */,
+				B91CB7AA8BBBB2FD0A190292 /* SignerApp */,
+				37B9F6858FA3BF393618B1F0 /* src */,
+				D957977A4567C3F6D89A6908 /* Products */,
+				31C59120D6E105734E785B06 /* Projects */,
+			);
+			sourceTree = "<group>";
+		};
+		31C59120D6E105734E785B06 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				A8C5BEA563FDC9E8403DBC84 /* Shared */,
+			);
+			name = Projects;
+			sourceTree = "<group>";
+		};
+		35C7DF11ABFEB07B2AB16BA4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B3D9327C0AC95404A204A763 /* libshared_static.a */,
+				3AA28D8A2A545DC500B03A3F /* shared.dylib */,
+				A500F82B58B1625CDB80A87E /* uniffi-bindgen */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		37B9F6858FA3BF393618B1F0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				CD719670BE22D3DE2F04DC32 /* shared.udl */,
+			);
+			name = src;
+			path = ../shared/src;
+			sourceTree = "<group>";
+		};
+		B91CB7AA8BBBB2FD0A190292 /* SignerApp */ = {
+			isa = PBXGroup;
+			children = (
+				D7E50AE8D5FE657E155695F1 /* ContentView.swift */,
+				16A09A3532A117EA4638CD82 /* Info.plist */,
+				C06C39854EFD470070446175 /* SignerAppApp.swift */,
+			);
+			path = SignerApp;
+			sourceTree = "<group>";
+		};
+		D957977A4567C3F6D89A6908 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				981B9FC1A3691C66AA7D022F /* SignerApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F8B1A0E48570C47A77CB74AE /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				5CFAB29AB851735376F82605 /* SharedTypes */,
+			);
+			name = Packages;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DFFD1D1265B228F437171E31 /* SignerApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65924F2E8D3AC7A8AB6E9B13 /* Build configuration list for PBXNativeTarget "SignerApp" */;
+			buildPhases = (
+				28FD3CB5FB011610847648A1 /* Sources */,
+				DE07B2367C1731B22718F4FC /* Resources */,
+				0601D36AB9908A6562098A2E /* Frameworks */,
+			);
+			buildRules = (
+				D27BF368A9BF639742ACB4B3 /* PBXBuildRule */,
+			);
+			dependencies = (
+				850319C3C8941BDB3A3EEEC8 /* PBXTargetDependency */,
+				23DD0BB362C0ED00F0736834 /* PBXTargetDependency */,
+			);
+			name = SignerApp;
+			packageProductDependencies = (
+				D4B1C957D1A3B47626E72EAA /* SharedTypes */,
+				3AA28D8E2A54712900B03A3F /* web3.swift */,
+			);
+			productName = SignerApp;
+			productReference = 981B9FC1A3691C66AA7D022F /* SignerApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E7AE07C6FF3CE5B9F904854 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1200;
+			};
+			buildConfigurationList = 9594403492CCC0CAD80BDC97 /* Build configuration list for PBXProject "SignerApp" */;
+			compatibilityVersion = "Xcode 11.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 21BE11CD22DA1ADF8C11E31A;
+			packageReferences = (
+				3AA28D8D2A54712900B03A3F /* XCRemoteSwiftPackageReference "web3" */,
+			);
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 35C7DF11ABFEB07B2AB16BA4 /* Products */;
+					ProjectRef = A8C5BEA563FDC9E8403DBC84 /* Shared */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				DFFD1D1265B228F437171E31 /* SignerApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3AA28D8A2A545DC500B03A3F /* shared.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = shared.dylib;
+			remoteRef = 3AA28D892A545DC500B03A3F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A500F82B58B1625CDB80A87E /* uniffi-bindgen */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "uniffi-bindgen";
+			remoteRef = CC261FE76FC57BCF476597D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B3D9327C0AC95404A204A763 /* libshared_static.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libshared_static.a;
+			remoteRef = C1FC2277A9B78773CD0E701C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DE07B2367C1731B22718F4FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42936AC2E9FCBACEE3DB6091 /* uniffi-bindgen in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		28FD3CB5FB011610847648A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20DD69D09986CC2DFE111032 /* ContentView.swift in Sources */,
+				3B35B6AAEC63138B8BAA30E9 /* SignerAppApp.swift in Sources */,
+				5249B9BB3F194EBED80F4DAF /* shared.udl in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		23DD0BB362C0ED00F0736834 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "shared-staticlib";
+			targetProxy = 267FBF252E2E44954FF0AADC /* PBXContainerItemProxy */;
+		};
+		850319C3C8941BDB3A3EEEC8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "uniffi-bindgen-bin";
+			targetProxy = 25C5FD8473EAE953EAA0617D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1B8C79912FB7DAF408E6C7BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		938FBEE3B1239AB789162CB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AEF9CF1E31E29DFA370C846E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 66UMZ3A2K2;
+				INFOPLIST_FILE = SignerApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-w",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.signer.SignerApp;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = generated/sharedFFI.h;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F31B5D112359237CB8DA3503 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 66UMZ3A2K2;
+				INFOPLIST_FILE = SignerApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-w",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.signer.SignerApp;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = generated/sharedFFI.h;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		65924F2E8D3AC7A8AB6E9B13 /* Build configuration list for PBXNativeTarget "SignerApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEF9CF1E31E29DFA370C846E /* Debug */,
+				F31B5D112359237CB8DA3503 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9594403492CCC0CAD80BDC97 /* Build configuration list for PBXProject "SignerApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				938FBEE3B1239AB789162CB1 /* Debug */,
+				1B8C79912FB7DAF408E6C7BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3AA28D8D2A54712900B03A3F /* XCRemoteSwiftPackageReference "web3" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/argentlabs/web3.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3AA28D8E2A54712900B03A3F /* web3.swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AA28D8D2A54712900B03A3F /* XCRemoteSwiftPackageReference "web3" */;
+			productName = web3.swift;
+		};
+		D4B1C957D1A3B47626E72EAA /* SharedTypes */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SharedTypes;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 8E7AE07C6FF3CE5B9F904854 /* Project object */;
+}

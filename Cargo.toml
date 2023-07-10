@@ -1,0 +1,13 @@
+[workspace]
+members = ["shared-types", "shared"]
+
+[workspace.package]
+edition = "2021"
+license = "Apache-2.0"
+keywords = ["crux", "crux_core", "cross-platform-ui", "ffi", "wasm"]
+rust-version = "1.70.0"
+
+[workspace.dependencies]
+anyhow = "1.0.71"
+serde = "1.0.164"
+uuid = { version = "1.4.0", features = ["v4", "wasm-bindgen", "js", "serde"] }
